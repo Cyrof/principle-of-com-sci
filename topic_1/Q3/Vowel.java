@@ -14,11 +14,11 @@ public class Vowel {
             input = scanner.nextLine();
         }
 
-
         char[] inputArray = input.toCharArray();
         char[] vowelArray = new char[inputArray.length];
         int[] vowelCount = new int[5];
         int[] vowelIndex = new int[]{ -1, -1, -1, -1, -1 }; // -1 indicates vowel not found
+
 
         // for loop to loop through char array to find vowels
         int index = 0;
