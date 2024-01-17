@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -36,9 +35,11 @@ public class Menu{
                 break;
 
                 case 'd':
+                numTri();
                 break;
 
                 case 'e':
+                primeOrNot();
                 break;
 
                 case 'q':
@@ -144,13 +145,59 @@ public class Menu{
             counter ++;
         }
         // for loop to print out number 5 per line
+        int totalOdd = 0;
         for (int i=0; i<allNums.length; i++){
             System.out.printf("%d ", allNums[i]);
 
             if ((i+1)%5 == 0){
                 System.out.println();
             }   
+            if (allNums[i] % 2 != 0){
+                totalOdd += allNums[i];
+            }
         }
-        System.out.println();
+        System.out.printf("\nThe sum of all odd num is %d\n", totalOdd);
+    }
+
+    static void numTri(){
+        // function to display if 3 user input integer forms a triangle
+        // param None
+        // return None
+
+        // 1 line 3 input prompt 
+        System.out.println("\nEnter 3 integer number: ");
+        int side1 = input.nextInt(), side2 = input.nextInt(), side3 = input.nextInt();
+        input.nextLine();
+
+        // boolean to check if all side greater thn addition of other 2 sides
+        boolean isTrangle = (side1+side2 > side3) && (side2+side3 > side1) && (side1+side3 > side2);
+
+        System.out.println("The side " + side1 + ", " + side2 + "," + side3 + (isTrangle ? " forms a triangle" : " does not form a triangle") + "\n");
+    }
+
+    static void primeOrNot(){
+        // function to check if number is a prime number or not and display it 
+
+        System.out.println("\nEnter an integer number: ");
+        int num = input.nextInt();
+
+        input.nextLine();
+
+        System.out.println("The number: " + num + (isPrime(num) ? " is a prime number\n" : " is not a prime number\n"));
+
+
+    }
+    
+    static boolean isPrime(int num){
+        // function to check if number is prime or not 
+        // for loop to check if every number starting from 2 to num - 1 divided by num return 0 
+        // if return 0 thn num is not prime
+        // else it is prime
+        for (int i=2; i < num; i++){
+            if ((num%i) == 0){
+                return false;
+            }
+        }
+        return true;
     }
 }
