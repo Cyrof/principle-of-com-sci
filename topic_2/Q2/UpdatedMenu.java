@@ -234,7 +234,7 @@ public class UpdatedMenu{
         // return None
         int highest = nums[0];
         int lowest = nums[0];
-        int avg = 0;
+        double avg = 0;
 
         for (int i : nums){
             if (i > highest){
