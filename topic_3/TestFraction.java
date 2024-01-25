@@ -25,12 +25,17 @@ public class TestFraction{
                 System.out.print("\nEnter denominator: ");
                 int denominator = input.nextInt();
                 // try catch to check denominator is not 0 and raise error if so 
-                try{
-                    f.set_fraction(numerator, denominator);
-                } catch (IllegalArgumentException e){
-                    System.err.println("Error: " + e.getMessage() + "\n");
-                }
+                // try{
+                //     // f.set_fraction(numerator, denominator);
+                //     f.numerator = numerator;
+                //     f.denominator = denominator;
+                // } catch (IllegalArgumentException e){
+                //     System.err.println("Error: " + e.getMessage() + "\n");
+                // }
                 // use fraction class to display fraction
+                f.setNumerator(numerator);
+                f.setDenominator(denominator);
+                f.switch_sign();
                 f.display_fraction();
             }
         }
