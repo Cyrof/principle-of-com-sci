@@ -2,7 +2,7 @@
 
 public class Baby {
 
-    // private instance variable
+    // private instance variable    
     private int age;
     private String name;
 
