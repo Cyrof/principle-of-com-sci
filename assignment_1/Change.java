@@ -44,7 +44,15 @@ public class Change {
         this.coinChangeAmt = coinAmt;
     }
 
-    
+    private void calculateCoins(){
+        int remainingAmt = this.coinChangeAmt;
+
+        int [] denominations = {200, 100, 50, 20, 10, 5};
+
+        for (int x : denominations){
+            
+        }
+    }
 
 
     
