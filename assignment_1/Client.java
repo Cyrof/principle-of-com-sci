@@ -13,7 +13,7 @@ public class Client {
     }
 
     public static void main(String[] args) {
-        
+        Change c = new Change("keith", 120);
     }
     
 }

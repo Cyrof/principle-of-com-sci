@@ -8,6 +8,7 @@ public class Change {
     // and coin change amount that the person have
     private String personName;
     private int coinChangeAmt;
+    private CoinDenominationCountry cDenominationCountry;
 
     // private instance varaibles for number of $2, $1, 50c, 20c, 10c, 5c respectively 
     // to count the amount of change from total amount of coin change 
@@ -18,18 +19,21 @@ public class Change {
         // Default Change class constructor 
         // it sets the default instance variables
 
-        this.personName = "no-name";
-        this.coinChangeAmt = 0;
+        this("Bob", 0);
     }
 
     public Change(String name, int coinAmt){
         // Change class constructor with parameter to 
         // set the instance variable using the parameter
 
-        this.personName = name;
-        this.coinChangeAmt = coinAmt;
+        this(name, coinAmt, CoinDenominationCountry.Australia);
     }
 
+    public Change(String name, int coinAtm, CoinDenominationCountry country){
+        this.personName = name;
+        this.coinChangeAmt = coinAtm;
+        this.cDenominationCountry = country;
+    }
 
     public void setName(String name){
         // this method is the setter method to set the person name 
@@ -47,11 +51,6 @@ public class Change {
     private void calculateCoins(){
         int remainingAmt = this.coinChangeAmt;
 
-        int [] denominations = {200, 100, 50, 20, 10, 5};
-
-        for (int x : denominations){
-            
-        }
     }
 
 
