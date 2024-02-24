@@ -13,7 +13,7 @@ public class Change {
     // private instance varaibles for number of $2, $1, 50c, 20c, 10c, 5c respectively 
     // to count the amount of change from total amount of coin change 
     // the person have
-    private int deno_1, deno_2, deno_3, deno_4, deno_5, deno_6;
+    // private int deno_1, deno_2, deno_3, deno_4, deno_5, deno_6;
     private CoinNodeList coinNodeList;
 
     // private CoinNode denominationCounts;
@@ -39,12 +39,6 @@ public class Change {
         
     }
 
-    // public Change(String name, int coinAtm, CoinDenominationCountry country){
-    //     this.personName = name;
-    //     this.coinChangeAmt = coinAtm;
-    //     this.cDenominationCountry = country;
-    // }
-
     public void setName(String name){
         // this method is the setter method to set the person name 
         // using a parameter 
@@ -58,6 +52,14 @@ public class Change {
         this.coinChangeAmt = coinAmt;
     }
 
+    public String getName(){
+        return this.personName;
+    }
+
+    public int getCoinAmt(){
+        return this.coinChangeAmt;
+    }
+
     private void calculateCoins(){
         int remainingAmt = this.coinChangeAmt;
         int[] denominations = cDenominationCountry.getDenominations();
@@ -66,13 +68,17 @@ public class Change {
 
         for (int x : denominations){
             int count = remainingAmt / x;
-            coinNodeList.addNode(count);
+            coinNodeList.addNode(count, x);
             remainingAmt %= x;
         }
     }
 
     public CoinCountNode gCountNode(){
         return this.coinNodeList.gHead();
+    }
+
+    public CoinNodeList getNodeList(){
+        return this.coinNodeList;
     }
     
 }

@@ -4,11 +4,21 @@
 public class CoinCountNode {
 
     private int count;
+    private int coin;
     private CoinCountNode next;
 
-    public CoinCountNode(int count){
+    public CoinCountNode(int count, int coin){
+        this.coin = coin;
         this.count = count;
         this.next = null;   
+    }
+
+    public void setCoin(int coin){
+        this.coin = coin;
+    }
+
+    public int getCoin(){
+        return this.coin;
     }
 
     public void setData(int count){
