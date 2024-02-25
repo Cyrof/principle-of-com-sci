@@ -1,14 +1,28 @@
 /**
- * CoinNodeList
+ * CoinNodeList represents a linked list structure for managing coin count data.
+ * It provides methods to add coin count nodes, retrive nodes by index, calculate the length of the list,
+ * and convert the list to string representations for display or change calculation.
+ * CoinNodeList instances are used to organize and manage coiun count data efficiently.
+ * 
+ * @author Keith Neo Kai Si
  */
 public class CoinNodeList {
 
-    private CoinCountNode head;
+    private CoinCountNode head; // The head node of the linked list
 
+    /**
+     * Constructs a CoinNodeList with an initial empty list.
+     */
     public CoinNodeList(){
         this.head = null;
     }
-
+    
+    /**
+     * Adds a new coin count node with specified count and coin denomination to the end of the list.
+     * 
+     * @param count The count of coins to add.
+     * @param coin The denomination of coin to add.
+     */
     public void addNode(int count, int coin){
         CoinCountNode newCount = new CoinCountNode(count, coin);
 
@@ -23,6 +37,12 @@ public class CoinNodeList {
         }
     }
 
+    /**
+     * Retrieves the coin count node at the specified index in the list.
+     * 
+     * @param index The index of the node to retrive.
+     * @return The coin count node at the specified index, or null if the index is out of bounds
+     */
     public CoinCountNode get(int index){
         if (index < 0){
             return null;
@@ -40,6 +60,11 @@ public class CoinNodeList {
         return null;
     }
 
+    /**
+     * Calculates and returns the length of the linked list.
+     * 
+     * @return The length of the linked list.
+     */
     public int length(){
         CoinCountNode current = this.head;
         int len = 0;
@@ -50,6 +75,11 @@ public class CoinNodeList {
         return len;
     }
 
+    /**
+     * Converts the linked list to a string representation.
+     * 
+     * @return A string representation of the coin count nodes in the list.
+     */
     public String toString(){
         CoinCountNode current = this.head;
         String nodeListString = "";
@@ -65,6 +95,11 @@ public class CoinNodeList {
         return nodeListString;
     }
 
+    /**
+     * Generates a string representation of the non-zero coin counts for change calculation.
+     * 
+     * @return A string representaion of non-zero coin counts for change calculation.
+     */
     public String getChangeCount(){
         CoinCountNode current = this.head;
         String coinChangeString = "";
@@ -79,6 +114,11 @@ public class CoinNodeList {
         return coinChangeString;
     }
 
+    /**
+     * Retrives the head node of the linked list.
+     * 
+     * @return The head node of the linked list.
+     */
     public CoinCountNode gHead(){
         return this.head;
     }

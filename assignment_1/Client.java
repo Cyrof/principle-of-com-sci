@@ -1,19 +1,55 @@
-// client class to get user input and output 
-// and link other classes 
 import java.util.Scanner;
 
+/**
+ * The Client class serves as the main program for managing change data.
+ * It allows users to input data manually or use hardcoded test data,,
+ * performs various operations on the data, and display results.
+ * 
+ * This class interacts with the Change, CoinDenominationsCountry, CoinNodeList,
+ * and CoinCountNode classes to handle change date, coin denominations, and calculations.
+ * 
+ * @author Keith Neo Kai Si
+ * @see Change
+ * @see CoinDenominationCountry
+ * @see CoinNodeList
+ * @see CoinCountNode
+ */
 public class Client {
-    private static final Change[] changeArray = new Change[100];
-    private static int changeindex = 0;
+    private static final Change[] changeArray = new Change[100]; // Array to store Change objects
+    private static int changeindex = 0; // Index to track Change object insertion
 
+    
+    /** 
+     * Checks if the given coin amount is valid (multiple of 5).
+     * 
+     * @param Amt The coin amount to check.
+     * @return true i the coin amount is valid, false otherwise.
+     */
     public static boolean isValidCoinAmt(int Amt){
         return (Amt % 5==0) ? true: false;
     }
 
+    
+    /** 
+     * checks if the given name is valid (single word).
+     * 
+     * @param name The name to check.
+     * @return true if the name if valid, false otherwise.
+     */
     public static boolean isValidName(String name){
         return name.trim().split("\\s").length == 1;
     }
 
+    /** 
+     * Updates the balance of a person's coin amount by adding the specified amount.
+     * 
+     * This method iterates through the array of Change objects, representing individuals' coin data.
+     * For each Change object, it checks if the person's name matches the provided name.
+     * If a match if found, the provided amount is added to the person's coin amount using the {@link Change#addCoinAmt(int)} method.
+     * 
+     * @param name The name of the person whose balance to update.
+     * @param amt The amount of coins to add to the balance.
+     */
     public static void updatePBalance(String name, int amt){
         for (Change c : changeArray){
             if (c == null){
@@ -26,6 +62,17 @@ public class Client {
         }
     }
 
+    /**
+     * Allows the user to input data for individuals' coin balance interactively through the console.
+     * 
+     * This method prompts the user to enter the name and coin value for each person.
+     * It validates the input to ensure the name is a single word and the coin value is a multiple of 5.
+     * If the input is invalid, approriate error messages are displayed, and user is prompted to re-enter the data.
+     * Once valid data is entered, the person's coni balance is updated using the {@link #updatePBalance(String,int)} method.
+     * A new Change object is created with the provided name and coin value, and it is added to the array of Change object (changeArray).
+     * 
+     * @param input The Scanner object for user input.
+     */
     public static void userInput(Scanner input){
         String pName;
         int coinAmt;
@@ -64,6 +111,11 @@ public class Client {
         System.out.println("Data loaded into array.");
     }
 
+    /**
+     * Hardcodes test data into the change Array.
+     *  
+     * @param input The Scanner object to read user input.
+     */
     public static void hardcodeInput(){
         changeArray[0] = new Change("Jasmine", 525);
         changeArray[1] = new Change("Lucas", 305);
@@ -81,6 +133,17 @@ public class Client {
         System.out.println("Data loaded into array.");
     }
 
+    /**
+     * Allwos the user to choose betweeen user-defined data input and hard-coded test data input.
+     * 
+     * This method present a menu to the user with options to choose between user-defined data and hard-coded test data input
+     * The user's choice is read from the console using the provided Scanner object.
+     * Depending on the choice made by the user, it calls either the {@link #userInput(Scanner)} method for user-defined data input
+     * or the {@link #hardcodeInput()} method for hard-coded test data input.
+     * If the user enters an invalid choice, and erro message is displayed, and the user is prompted to try again.
+     *  
+     * @param input The Scanner object to read user input.
+     */
     public static void dataInputChoice(Scanner input){
         while (true){
             System.out.print("1 - User Define Data\n2 - Hard Code Test Data\n>> ");
@@ -102,6 +165,19 @@ public class Client {
         }
     }
 
+    /**
+     * Displays a menu of options and allows the user to select an action to perform.
+     * 
+     * This method presents a menu of options to the user, allowing them to choose from various actions to perform.
+     * The options include entering a name and display change, finding the name with the largest amount and displaying change,
+     * finding the name with the smallest amount and displaying change, calculating and displaying the total number of coin for each denomination, 
+     * calculating and displaying the total amount for the sum of all denominations, and exiting the program.
+     * The user's choice is read from the console using the provided Scanner object.
+     * Depending on the chosen option, the corresponding method is called to perform the action.
+     * If the user enters an invalid choice, an error message is displayed, and the user is prompted to try again.
+     * 
+     * @param input The Scanner object to read user inputs.
+     */
     public static void menu(Scanner input){
         while (true){
             System.out.println("\n1 - Enter a name and display change to be given for each denomination");
@@ -144,6 +220,14 @@ public class Client {
         }
     }
 
+    /**
+     * Displays information about a person's change.
+     * 
+     * This method takes a Change object as input and displays information abou the person's change, including their name, the total change amount, 
+     * and the breakdown of change for each denomination. It formats the information into a string and prints it to the console.
+     * 
+     * @param c The Change object representing the person's change.
+     */
     public static void displayPerson(Change c){
         String pName = c.getName();
         int coinAmt = c.getCoinAmt();
@@ -151,6 +235,16 @@ public class Client {
         System.out.printf("\nCustomer:\n%s %d cents\n\n%s\n", pName, coinAmt, changeString);
     }
 
+    /**
+     * Executes option 1 of the menu: Enter a name and display change to be given for each denomination.
+     * 
+     * This method prompts the user to enter a person's name and then searches for a matching name in the list of changes.
+     * If a match if found, it displays information about the person's change, including their name, the total change amount, 
+     * and the breakdown of change for each denomination. If no match is found, it informs the user that the person's name
+     * was not found in the list of changes.
+     * 
+     * @param input The Scanner object used to read user input.
+     */
     public static void option1(Scanner input){
         String personName;
         while (true){
@@ -176,6 +270,15 @@ public class Client {
         }
     }
 
+    /**
+     * Executes option 2 from the menu: Find the name with the largest amount and display change for each denomination.
+     * 
+     * This method iterates throught the array of changes to find the person with the highest change amount. 
+     * Once the person with the highest change amount is found, it displays information about their change,
+     * including their name, the total change amount, and breakdown of change for each denomination.
+     * 
+     * @param input The Scanner object to read user input.
+     */
     public static void option2(Scanner input){
         int highest = changeArray[0].getCoinAmt();
         Change highCoinPerson = changeArray[0];
@@ -193,6 +296,15 @@ public class Client {
         displayPerson(highCoinPerson);
     }
 
+    /**
+     * Executes option 3 from the menu: Find the name with the smallest amount and display change for each denomination.
+     * 
+     * This method iterates through the array of changes to find the person with the smallest change amount.
+     * Once the person with the smallest change amount is found, it displays information about their change,
+     * including their name, the total change amount, and the breakdown of change for each denomination.
+     * 
+     * @param input The Scanner object to read user input
+     */
     public static void option3(Scanner input){
         int lowest = changeArray[0].getCoinAmt();
         Change lowestCoinPerson = changeArray[0];
@@ -210,6 +322,15 @@ public class Client {
         displayPerson(lowestCoinPerson);
     }
 
+    /**
+     * Executes option 4 of the menu: Calculate and display the total number of coins for each denomination.
+     * 
+     * This method calculates the total number of coins for each denomination across all change amounts in the changeArray.
+     * It iterates through each Change object in the changeArray and accumulates the coin counts for each denomination.
+     * Once the total counts for each denomination are calculated, it displays the result as a string representation.
+     * 
+     * @param input The Scanner object used to read user input.
+     */
     public static void option4(Scanner input){
         CoinNodeList tempNodeList = changeArray[0].getNodeList();
 
@@ -225,6 +346,15 @@ public class Client {
         System.out.println(tempNodeList.toString());
     }
 
+    /**
+     * Executes option 5 of the menu: Calculate and display the total amount (not the total number of coins) for the sum of all denominations.
+     * 
+     * This method calculates the total amount represented by the sum of all change amounts in the changeArray.
+     * It iterates through each Change object in the changArray and accumulates the coin amounts.
+     * Once the total amount is calculated, it displays the result as a formatted string representation.
+     * 
+     * @param input The Scanner object used to read user input.
+     */
     public static void option5(Scanner input){
         int totalCoinAmt = 0;
         for (Change c : changeArray){
@@ -237,15 +367,37 @@ public class Client {
         System.out.printf("\nTotal coin amount: %d\n", totalCoinAmt);
     }
 
+    /**
+     * Executes option 6 of the menu: Display a farewell message.
+     * 
+     * This method prints a farewell message to the console, thanking the user for using the program 
+     * and wishing them a great day.
+     */
     public static void option6(){
         System.out.println("Thank you for using the program. Have a great day!");
     }
 
+    /**
+     * Initiates the program by calling the data input choice method and the main menu.
+     * 
+     * This method serves as the entry point of the program. It prompts the user to choose between
+     * entering data manually or using hard-coded test data. After the data input choice is made,
+     * the main menu is displayed for further interactions.
+     * 
+     * @param input The Scanner object used to read user input.
+     */
     public static void run(Scanner input){
         dataInputChoice(input);
         menu(input);
     }
 
+    /**
+     * Main method: Entry point of the program.
+     * This method creates a Scanner object to read user input, then invokes the run method
+     * to start the program's execution.
+     * 
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         run(input);
