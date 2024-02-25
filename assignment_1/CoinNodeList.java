@@ -55,13 +55,28 @@ public class CoinNodeList {
         String nodeListString = "";
 
         while(current != null){
-            nodeListString += String.format("%s : %d", current.getCoin(), current.getCount());
+            String coin = (current.getCoin() % 100 == 0) ? String.format("%d dollar", (current.getCoin()/100)) : String.format("%d cents", current.getCoin());
+            nodeListString += String.format("%s : %d", coin, current.getCount());
             if (current.getNext() != null){
                 nodeListString += "\n";
             }
             current = current.getNext();
         }
         return nodeListString;
+    }
+
+    public String getChangeCount(){
+        CoinCountNode current = this.head;
+        String coinChangeString = "";
+
+        while (current != null){
+            String coin = (current.getCoin() % 100 == 0) ? String.format("%d dollar", (current.getCoin()/100)) : String.format("%d cents", current.getCoin());
+            if (current.getCount() != 0){
+                coinChangeString += String.format("%s : %d\n", coin, current.getCount());
+            }
+            current = current.getNext();
+        }
+        return coinChangeString;
     }
 
     public CoinCountNode gHead(){

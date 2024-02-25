@@ -50,6 +50,12 @@ public class Change {
         // this method is the setter method to set the coint amount of ther person 
         // using a parameter
         this.coinChangeAmt = coinAmt;
+        calculateCoins();
+    }
+
+    public void addCoinAmt(int amt){
+        this.coinChangeAmt += amt;
+        calculateCoins();
     }
 
     public String getName(){

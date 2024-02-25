@@ -29,6 +29,10 @@ public class CoinCountNode {
         return this.count;
     }
 
+    public void addCount(int count){
+        this.count += count;
+    }
+
     public CoinCountNode getNext(){
         return this.next;
     }
