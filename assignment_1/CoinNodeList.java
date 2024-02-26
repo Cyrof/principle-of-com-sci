@@ -122,4 +122,26 @@ public class CoinNodeList {
     public CoinCountNode gHead(){
         return this.head;
     }
+
+    /**
+     * Creates a deep copy (clone) of the CoinNodeList.
+     * This method ensures that the cloned list is independent of the original list,
+     * meaning modifications to one list will not affect the other.
+     * 
+     * @return A deep copu of the CoinNodeList
+     * 
+     * @see CoinNodeList
+     * @see CoinCountNode
+     */
+    public CoinNodeList clone(){
+        CoinNodeList clonedList = new CoinNodeList();
+        if (this.head != null){
+            CoinCountNode current = this.head;
+            while (current != null){
+                clonedList.addNode(current.getCount(), current.getCoin());
+                current = current.getNext();
+            }
+        }
+        return clonedList;
+    }
 }
