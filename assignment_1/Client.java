@@ -378,6 +378,17 @@ public class Client {
     }
 
     /**
+     *  Function that contains and return student information at the start of the program 
+     *
+     * @return info This variable contains student information and is return as a string
+     * 
+     */
+    public static String studentInfo(){
+        String info = "Student information:\nName: Keith Neo Kai Si\nStudent Number: 35107628\nModule: ICT167\nTutor: Aaron yeo";
+        return info;
+    }
+
+    /**
      * Initiates the program by calling the data input choice method and the main menu.
      * 
      * This method serves as the entry point of the program. It prompts the user to choose between
@@ -400,6 +411,7 @@ public class Client {
      */
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        System.out.println(studentInfo() + "\n");
         run(input);
         
     }
