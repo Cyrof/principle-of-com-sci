@@ -332,7 +332,7 @@ public class Client {
      * @param input The Scanner object used to read user input.
      */
     public static void option4(Scanner input){
-        CoinNodeList tempNodeList = changeArray[0].getNodeList();
+        CoinNodeList tempNodeList = changeArray[0].getNodeList().clone();
 
         for (int i=1; i<changeArray.length; i++){
             if (changeArray[i] == null){
