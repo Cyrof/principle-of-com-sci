@@ -146,7 +146,12 @@ public class Client {
                     System.err.println("\nPlease provide a valid input.");
                     continue;
                 }
-                coinAmt = Integer.parseInt(coinAmtString);
+                try{
+                    coinAmt = Integer.parseInt(coinAmtString);                    
+                } catch (NumberFormatException e){
+                    System.out.println("Invalid coin value. Try again.");
+                    continue;
+                }
 
                 if (!isValidCoinAmt(coinAmt)){
                     System.err.println("\nIncorrect coin value. Must be multiple of 5 and cannot be less than  or equal to 0");
