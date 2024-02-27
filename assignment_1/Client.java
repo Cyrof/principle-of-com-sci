@@ -29,36 +29,87 @@ public class Client {
         return (Amt % 5==0 && Amt > 0) ? true: false;
     }
 
-    
+    /**
+     * Determines id the provided string can be parsed into an integer. 
+     * This method uses a try-catch block to attempt parsing the string into an integer.
+     * If the parsing is successfull, it returns true, indicating that the string is numeric.
+     * If a NumberFormatExeception is caught, it returns false, indicating that the string is not numeric.
+     * 
+     * @param s The string to be checked for numeric content.
+     * @return true is the string can be parsed into and integer, false otherwise.
+     * 
+     * @see Client#isValidCoinAmt(int)
+     */
+    public static boolean isNumeric(String s){
+        try {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException e){
+            return false;
+        }
+    }
+
     /** 
-     * checks if the given name is valid (single word).
+     * Validates if the given string is a valid name.
+     * A name is considered valid if it is not emtpy, not null, consists of a single word (no spaces),
+     * and is not numeric
      * 
      * @param name The name to check.
      * @return true if the name if valid, false otherwise.
+     * 
+     * @see Client#userInput(Scanner)
      */
     public static boolean isValidName(String name){
-        return (!name.isEmpty() && name != null && name.trim().split("\\s").length == 1) ? true : false;
-        // return name.trim().split("\\s").length == 1;
+        return (!name.isEmpty() && name != null && name.trim().split("\\s").length == 1 && !isNumeric(name)) ? true : false;
     }
 
     /** 
      * Updates the balance of a person's coin amount by adding the specified amount.
-     * 
-     * This method iterates through the array of Change objects, representing individuals' coin data.
-     * For each Change object, it checks if the person's name matches the provided name.
-     * If a match if found, the provided amount is added to the person's coin amount using the {@link Change#addCoinAmt(int)} method.
+     * This function iterates through an array of changes, looking for a change with the specified name.
+     * If found, it updates the amount of coins in that change by adding the specified amount.
+     * If no change with the given name if found, it return false.
      * 
      * @param name The name of the person whose balance to update.
      * @param amt The amount of coins to add to the balance.
+     * @return true if the balance of the change with the given name is successfully updated, false otherwise
+     * 
+     * @see Change#addCoinAmt(int)
      */
-    public static void updatePBalance(String name, int amt){
+    public static boolean updatePBalance(String name, int amt){
         for (Change c : changeArray){
             if (c == null){
                 break;
             }
-            if (c != null && c.getName()==name){
+            if (c != null && c.getName().equals(name)){
+                System.out.println("test");
                 c.addCoinAmt(amt);
-                break;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Prompts the user to decide whether to add more persons to the system. 
+     * This method continouosly asks the user if they have more person to enter until a valid response is given.
+     * 
+     * @param input The Scanner object used to read the user's input from the standard input stream.
+     * @return true if the user indicates they have more persons to enter, false if they do not.
+     * 
+     * @see #userInput(Scanner)
+     */
+    public static boolean moreUser(Scanner input){
+        while (true) {
+            System.out.print("\nDo you have more person to enter (Y/N): ");
+            String userChoice = input.nextLine();
+            switch (userChoice.toLowerCase()) {
+                case "y":
+                    return true;
+                case "n":
+                    return false;               
+                default:
+                    System.err.println("\nUnknown input. Try again.");
+                    continue;
             }
         }
     }
@@ -88,7 +139,7 @@ public class Client {
             }
 
             while (true){
-                System.out.print("Please enter the coin value for the person (multiple of 5): ");
+                System.out.print("\nPlease enter the coin value for the person (multiple of 5): ");
                 String coinAmtString = input.nextLine().trim();
 
                 if (coinAmtString.isEmpty()){
@@ -98,25 +149,28 @@ public class Client {
                 coinAmt = Integer.parseInt(coinAmtString);
 
                 if (!isValidCoinAmt(coinAmt)){
-                    System.err.println("\nIncorrect coin value. Must be multiple of 5 and cannot be less than 0");
+                    System.err.println("\nIncorrect coin value. Must be multiple of 5 and cannot be less than  or equal to 0");
                     continue;
                 } else {
                     break;
                 }
             }
-            updatePBalance(pName, coinAmt);
-            
+            boolean updateBool = updatePBalance(pName, coinAmt);
 
-            changeArray[changeindex] = new Change(pName, coinAmt);
-            changeindex++;
-            System.out.print("Do you have more person to enter (Y/N): ");
-            if (input.nextLine().equalsIgnoreCase("y")){
+            if(!updateBool){
+                changeArray[changeindex] = new Change(pName, coinAmt);
+                changeindex++;
+            }
+
+            
+            
+            if (moreUser(input)){
                 continue;
             } else {
                 break;
             }
         }
-        System.out.println("Data loaded into array.");
+        System.out.println("\nData loaded into array.");
     }
 
     /**

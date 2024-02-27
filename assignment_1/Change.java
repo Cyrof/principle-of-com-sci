@@ -17,7 +17,7 @@ public class Change {
 
     /**
      * Constructs a Change object with default values.
-     * The default name is et to "Bob",, and the change amount is set to 0.
+     * The default name is set to "Bob", and the change amount is set to 0.
      */
     public Change(){
 
@@ -115,6 +115,7 @@ public class Change {
     private void calculateCoins(){
         int remainingAmt = this.coinChangeAmt;
         int[] denominations = cDenominationCountry.getDenominations();
+        coinNodeList = null;
         coinNodeList = new CoinNodeList();
 
 
