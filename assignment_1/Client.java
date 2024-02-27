@@ -26,7 +26,7 @@ public class Client {
      * @return true i the coin amount is valid, false otherwise.
      */
     public static boolean isValidCoinAmt(int Amt){
-        return (Amt % 5==0) ? true: false;
+        return (Amt % 5==0 && Amt > 0) ? true: false;
     }
 
     
@@ -37,7 +37,8 @@ public class Client {
      * @return true if the name if valid, false otherwise.
      */
     public static boolean isValidName(String name){
-        return name.trim().split("\\s").length == 1;
+        return (!name.isEmpty() && name != null && name.trim().split("\\s").length == 1) ? true : false;
+        // return name.trim().split("\\s").length == 1;
     }
 
     /** 
@@ -88,16 +89,23 @@ public class Client {
 
             while (true){
                 System.out.print("Please enter the coin value for the person (multiple of 5): ");
-                coinAmt = input.nextInt();
+                String coinAmtString = input.nextLine().trim();
+
+                if (coinAmtString.isEmpty()){
+                    System.err.println("\nPlease provide a valid input.");
+                    continue;
+                }
+                coinAmt = Integer.parseInt(coinAmtString);
+
                 if (!isValidCoinAmt(coinAmt)){
-                    System.err.println("\nIncorrect coin value. Must be multiple of 5.");
+                    System.err.println("\nIncorrect coin value. Must be multiple of 5 and cannot be less than 0");
                     continue;
                 } else {
                     break;
                 }
             }
             updatePBalance(pName, coinAmt);
-            input.nextLine();
+            
 
             changeArray[changeindex] = new Change(pName, coinAmt);
             changeindex++;
@@ -179,6 +187,7 @@ public class Client {
      * @param input The Scanner object to read user inputs.
      */
     public static void menu(Scanner input){
+        int choice = 0;
         while (true){
             System.out.println("\n1 - Enter a name and display change to be given for each denomination");
             System.out.println("2 - Find the name with the largest amount and display change to be given for each denomination");
@@ -188,9 +197,18 @@ public class Client {
             System.out.println("6 - Exit");
             System.out.print(">>");
 
-            int choice = input.nextInt();
-            System.out.println("\n");
-            input.nextLine();
+            String choiceString = input.nextLine().trim();
+
+            if(choiceString.isEmpty()){
+                System.err.println("\nInput invalid. Try again.");
+                continue;
+            }
+            try{
+                choice = Integer.parseInt(choiceString);
+            } catch (Exception e){
+                System.err.println("Invalid input. Try again");
+                continue;
+            }
 
             switch (choice) {
                 case 1:
@@ -342,7 +360,7 @@ public class Client {
                 tempNodeList.get(j).addCount(changeArray[i].getNodeList().get(j).getCount());
             }
         }
-        System.out.println("Total number of coin for each denomination:");
+        System.out.println("\nTotal number of coin for each denomination:");
         System.out.println(tempNodeList.toString());
     }
 
@@ -374,7 +392,7 @@ public class Client {
      * and wishing them a great day.
      */
     public static void option6(){
-        System.out.println("Thank you for using the program. Have a great day!");
+        System.out.println("\nThank you for using the program. Have a great day!\n");
     }
 
     /**
@@ -411,7 +429,7 @@ public class Client {
      */
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        System.out.println(studentInfo() + "\n");
+        System.out.println("\n" + studentInfo() + "\n");
         run(input);
         
     }
