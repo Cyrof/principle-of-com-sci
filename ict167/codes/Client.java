@@ -16,6 +16,7 @@ public class Client {
         // uc.setExam_marks(74.2);
         // uc.to_string();
         // uc.gradeReport();
+
         CsvLoader loader = new CsvLoader();
         ArrayList<Student> students = loader.getStudents();
 
@@ -24,7 +25,14 @@ public class Client {
                 Student_Course sc = (Student_Course) s;
                 sc.to_string();
             }
+            else if (s instanceof Student_Research){
+                Student_Research sr = (Student_Research) s;
+                sr.to_string();
+            }
         }
-
+        // Research r = new Research('R');
+        // r.setPp_mark(79);
+        // r.setDis_mark(89);
+        // r.to_string();
     }  
 }

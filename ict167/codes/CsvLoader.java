@@ -39,6 +39,9 @@ public class CsvLoader {
                 if(line[0].equals("C")){
                     Student_Course temp = new Student_Course(line[1], line[2], Integer.parseInt(line[3]));
                     this.students.add(temp);
+                } else if (line[0].equals("R")){
+                    Student_Research temp = new Student_Research(line[1], line[2], Integer.parseInt(line[3]));
+                    this.students.add(temp);
                 }
             }
             fileReader.close();
@@ -64,7 +67,19 @@ public class CsvLoader {
                     if (l.contains(studID)){
                         if (s instanceof Student_Course){
                             Student_Course sc = (Student_Course) s;
-                            sc.addUnits(l);
+                            try{
+                                sc.addUnits(l);
+                            } catch (Exception e){
+                                System.err.println(e);
+                            }
+                        }
+                        if (s instanceof Student_Research){
+                            Student_Research sr = (Student_Research) s;
+                            try{
+                                sr.addUnits(l);
+                            } catch (Exception e){
+                                System.err.println(e);
+                            }
                         }
                     }
                 }

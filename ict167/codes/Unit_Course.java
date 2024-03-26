@@ -7,7 +7,6 @@ public class Unit_Course extends Unit{
     private String unitID;
     private int lvl;
     private double a1_marks, a2_marks, exam_marks, overall_marks = 0;
-    private int total_marks = 300;
 
     public Unit_Course(){
         this('N', "None");
@@ -21,7 +20,11 @@ public class Unit_Course extends Unit{
 
     private void setLvl(){
         // this.lvl = Integer.parseInt(this.unitID.charAt(0));
-        this.lvl = Integer.parseInt(String.valueOf(this.unitID.charAt(3)));
+        try{
+            this.lvl = Integer.parseInt(String.valueOf(this.unitID.charAt(3)));
+        } catch (Exception e){
+            throw e;
+        }
     }
 
     public void setUnitID(String unitID){
@@ -93,7 +96,7 @@ public class Unit_Course extends Unit{
     }
 
     private void calculateMarks(){
-        if (this.a1_marks!=0 && this.a2_marks!=0 && this.exam_marks!=0 && this.overall_marks!=0){
+        if (this.a1_marks>=0 && this.a2_marks>=0 && this.exam_marks>=0 && this.overall_marks>=0){
             double marks = this.overall_marks / this.total_marks;
             this.calculateGrade(marks);
             // System.out.println("Unit Graded.");
@@ -101,12 +104,6 @@ public class Unit_Course extends Unit{
 
     }
 
-    private boolean checkMarks(double marks){
-        if (marks >=0 && marks <= 100){
-            return true;
-        }
-        return false;
-    }
-
+    
 
 }

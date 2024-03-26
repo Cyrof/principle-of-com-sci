@@ -60,4 +60,12 @@ public class Unit {
         int result = (int) ((num*100)+0.5);
         return result;
     }
+
+    protected boolean checkMarks(double marks){
+        if (marks >=0 && marks <= 100){
+            return true;
+        }
+        return false;
+    }
+
 }
