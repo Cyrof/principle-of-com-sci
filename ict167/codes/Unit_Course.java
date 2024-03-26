@@ -96,7 +96,7 @@ public class Unit_Course extends Unit{
         if (this.a1_marks!=0 && this.a2_marks!=0 && this.exam_marks!=0 && this.overall_marks!=0){
             double marks = this.overall_marks / this.total_marks;
             this.calculateGrade(marks);
-            System.out.println("Unit Graded.");
+            // System.out.println("Unit Graded.");
         }
 
     }

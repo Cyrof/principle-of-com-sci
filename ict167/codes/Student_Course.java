@@ -24,7 +24,7 @@ public class Student_Course extends Student{
         temp_U.setA2_marks(Integer.parseInt(temp[4]));
         temp_U.setExam_marks(Integer.parseInt(temp[5]));
         units.add(temp_U);
-        System.out.println("Unit added to " + this.getStudID());
+        // System.out.println("Unit added to " + this.getStudID());
     }
 
     public void to_string(){
