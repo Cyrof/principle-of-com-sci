@@ -17,5 +17,14 @@ public class Client {
         // uc.to_string();
         // uc.gradeReport();
         CsvLoader loader = new CsvLoader();
+        ArrayList<Student> students = loader.getStudents();
+
+        for (Student s : students){
+            if (s instanceof Student_Course){
+                Student_Course sc = (Student_Course) s;
+                sc.to_string();
+            }
+        }
+
     }  
 }
