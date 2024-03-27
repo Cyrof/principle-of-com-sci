@@ -7,8 +7,6 @@ import java.util.ArrayList;
 public class Student_Course extends Student{
 
     private char type = 'C';
-    ArrayList<Unit> units = new ArrayList<>();
-    private final int maxUnits = 4;
 
     public Student_Course(){
         this("None", "None", 0);
@@ -18,39 +16,50 @@ public class Student_Course extends Student{
         super(fName, lName, studID);
     }
 
-    private boolean isMaxUnits(){
-        if (units.size()+1 <= this.maxUnits){
+    @Override
+    public char getType(){
+        return this.type;
+    }
+
+    public void setUnit(Unit unit){
+        if (this.isValidateUnit(unit)){
+            super.setUnit(unit);
+            System.out.println("Unit added.");
+        }
+    }
+
+    public Unit_Course getUnit(){
+        Unit u = super.getUnit();
+        return (Unit_Course) u;
+    }
+
+    private boolean isValidateUnit(Unit unit){
+        if (unit == null){
+            return false;
+        } else if(!(unit instanceof Unit_Course)){
             return false;
         } else {
             return true;
         }
     }
 
-    public void addUnits(String data){
-        if (!this.isMaxUnits()){
-            String[] temp = data.split(",");
-            Unit_Course temp_U = new Unit_Course(this.type, temp[1]);
-            temp_U.setA1_marks(Integer.parseInt(temp[3]));
-            temp_U.setA2_marks(Integer.parseInt(temp[4]));
-            temp_U.setExam_marks(Integer.parseInt(temp[5]));
-            this.units.add(temp_U);
+    public void reportGrade(){
+        Unit_Course unit = (Unit_Course) super.getUnit();
+        if (unit != null){
+            String s = String.format("Student type: %c\nName: %s %s\nStudent Number: %d\nUnit ID: %s\nOverall Marks: %.1f/300\nFinal Grade: %s\n", this.type,this.getFName(),this.getLName(),this.getStudID(), unit.getUnitID(), unit.getOverall_marks(), unit.getGrade());
+            System.out.println(s);
         } else {
-            throw new IndexOutOfBoundsException("Max Unit achieved.");
+            super.reportGrade();
         }
         
-        // System.out.println("Unit added to " + this.getStudID());
-    }
-
-    public void reportGrade(){
-        for (Unit u : this.units){
-            Unit_Course uc = (Unit_Course) u;
-            
-            String s = String.format("Student type: %c\nName: %s %s\nStudent Number: %d\nUnit ID: %s\nOverall Marks: %.1f/300\nFinal Grade: %s\n", this.type,this.getFName(),this.getLName(),this.getStudID(),uc.getUnitID(),uc.getOverall_marks(),uc.getGrade());
-            System.out.println(s);
-        }
     }
 
     public void to_string(){
-        System.out.println("I am working");
+        Unit_Course unit = (Unit_Course) super.getUnit();
+        String s = String.format("Student type: %c\nName: %s %s\nStudent Number: %d\n", this.type, super.getFName(), super.getLName(), super.getStudID());
+        if(unit != null){
+            s += String.format("Unit: %s\n", unit.getUnitID());
+        }
+        System.out.println(s);
     }
 }

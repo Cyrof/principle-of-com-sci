@@ -3,8 +3,6 @@ import java.util.ArrayList;
 public class Student_Research extends Student{
 
     private char type = 'R';
-    ArrayList<Unit> units = new ArrayList<>();
-    private final int maxUnits = 4;
 
     public Student_Research(){
         this("None", "None", 0);
@@ -14,31 +12,50 @@ public class Student_Research extends Student{
         super(fName, lName, studID);
     }
 
-    private boolean isMaxUnits(){
-        if (this.units.size()+1 <= this.maxUnits){
+    @Override
+    public char getType(){
+        return this.type;
+    }
+
+
+    public void setUnit(Unit unit){
+        if(this.isValidateUnit(unit)){
+            super.setUnit(unit);
+            System.out.println("Course set");
+        }
+        // if (!this.unit){
+        //     String[] temp = data.split(",");
+        //     this.course = new Research(this.type);
+        //     this.course.setPp_mark(Integer.parseInt(temp[1]));
+        //     this.course.setDis_mark(Integer.parseInt(temp[2]));
+        // }
+        // System.out.println("Course set");
+    }
+
+    private boolean isValidateUnit(Unit unit){
+        if (unit == null){
+            System.out.println("unit is null");
+            return false;
+        } else if(!(unit instanceof Research)){
+            System.out.println("instance is not research");
             return false;
         } else {
             return true;
         }
     }
 
-    public void addUnits(String data){
-        String[] temp = data.split(",");
-        Research temp_R = new Research(this.type);
-        temp_R.setPp_mark(Integer.parseInt(temp[1]));
-        temp_R.setDis_mark(Integer.parseInt(temp[2]));
-        this.units.add(temp_R);
-    }
-
     public void reportGrade(){
-        for(int i=0; i<this.units.size(); i++){
-            Research r = (Research) this.units.get(i);
-
-            String s = String.format("Unit %d\nStudent type: %c\nName: %s %s\nStudent Number: %d\nOverall Marks: %1.f/200\nFinal Grade: %s\n", i, this.type, this.getFName(), this.getLName(),this.getStudID(), r.getOverall_marks(), r.getGrade());
-        }
+        Research unit = (Research) super.getUnit();
+        String s = String.format("Student type: %c\nName: %s %s\nStudent Number: %d\nOverall Marks: %.1f/200\nFinal Grade: %s\n", this.type, this.getFName(), this.getLName(),this.getStudID(), unit.getOverall_marks(), unit.getGrade());
+        System.out.println(s);
     }
 
     public void to_string(){
-        System.out.println("I am working too");
+        Research unit = (Research) super.getUnit();
+        String s = String.format("Student type: %c\nName: %s %s\nStudent Number: %d\n", this.type, super.getFName(), super.getLName(), super.getStudID());
+        if(unit != null){
+            s += "Has Unit\n";
+        }
+        System.out.println(s);
     }
 }
