@@ -7,6 +7,7 @@ public class Student {
     private String fName;
     private String lName;
     private long studID;
+    private Unit unit=null;
 
     public Student(){
         this("None", "None", 0);
@@ -30,6 +31,10 @@ public class Student {
         this.studID = studID;
     }
 
+    public void setUnit(Unit unit){
+        this.unit = unit;
+    }
+
     public String getFName(){
         return this.fName;
     }
@@ -42,6 +47,10 @@ public class Student {
         return studID;
     }
 
+    public Unit getUnit(){
+        return this.unit;
+    }
+
     public void reportGrade(){
         System.out.println("There is no grade here.");
     }
@@ -51,5 +60,9 @@ public class Student {
             return true;
         }
         return false;
+    }
+
+    public char getType(){
+        return 'N';
     }
 }

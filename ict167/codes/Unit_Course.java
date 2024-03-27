@@ -7,6 +7,7 @@ public class Unit_Course extends Unit{
     private String unitID;
     private int lvl;
     private double a1_marks, a2_marks, exam_marks, overall_marks = 0;
+    private int total_marks = 300;
 
     public Unit_Course(){
         this('N', "None");
