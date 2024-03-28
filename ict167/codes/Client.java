@@ -139,10 +139,11 @@ public class Client {
             if (choice == 'y' || choice == 'n'){
                 if (choice == 'y'){
                     students.remove(s);
-                    System.out.println("Student removed");
+                    System.out.println("Student removed.");
                     break;
                 }
                 else{
+                    System.out.println("Student not removed.");
                     break;
                 }
             } else {
@@ -257,6 +258,7 @@ public class Client {
             }
             students.set(j+1, key);
         }
+        System.out.println("Student sorted.");
     }
 
     public static boolean isSorted(ArrayList<Student> students){
