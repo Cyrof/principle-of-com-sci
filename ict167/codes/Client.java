@@ -98,6 +98,8 @@ public class Client {
     public static void removeStudent(Scanner input, ArrayList<Student> students){
         int userIn = 0;
         Student s = null;
+        char choice = 'N';
+
         while (true){
             System.out.println("\nEnter nothing to exit.");
             System.out.println("Enter student ID to delete");
@@ -123,35 +125,36 @@ public class Client {
                 continue;
             }
         }
-        char choice = 'N';
-        while (true){
-            System.out.println("\nStudent found.");
-            System.out.println("Do you want to continue? [y/n]");
-            System.out.print(">> ");
+        if (s != null){
+             while (true){
+                System.out.println("\nStudent found.");
+                System.out.println("Do you want to continue? [y/n]");
+                System.out.print(">> ");
 
-            try{
-                choice = Character.toLowerCase(input.nextLine().charAt(0));
-            } catch (Exception e){
-                System.err.println("Invalid choice. Try again.");
-                continue;
-            }
-
-            if (choice == 'y' || choice == 'n'){
-                if (choice == 'y'){
-                    students.remove(s);
-                    System.out.println("Student removed.");
-                    break;
+                try{
+                    choice = Character.toLowerCase(input.nextLine().charAt(0));
+                } catch (Exception e){
+                    System.err.println("Invalid choice. Try again.");
+                    continue;
                 }
-                else{
-                    System.out.println("Student not removed.");
-                    break;
-                }
-            } else {
-                System.err.println("Invalid choice. Try agian.");
-                continue;
-            }
 
+                if (choice == 'y' || choice == 'n'){
+                    if (choice == 'y'){
+                        students.remove(s);
+                        System.out.println("Student removed.");
+                        break;
+                    }
+                    else{
+                        System.out.println("Student not removed.");
+                        break;
+                    }
+                } else {
+                    System.err.println("Invalid choice. Try agian.");
+                    continue;
+                }
+            }
         }
+       
     }
 
     public static void displayAll(ArrayList<Student> students){
