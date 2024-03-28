@@ -24,7 +24,7 @@ public class Student_Course extends Student{
     public void setUnit(Unit unit){
         if (this.isValidateUnit(unit)){
             super.setUnit(unit);
-            System.out.println("Unit added.");
+            // System.out.println("Unit added.");
         }
     }
 
