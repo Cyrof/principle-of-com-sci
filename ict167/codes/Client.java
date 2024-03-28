@@ -273,10 +273,17 @@ public class Client {
         }
     }
 
+    public static String studentInfo(){
+        String info = "Student information:\nName: Keith Neo Kai Si\nStudent Number: 35107628\nModule: ICT167\nTutor: Aaron yeo";
+        return info;
+    }
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         CsvHandler loader = new CsvHandler();
         ArrayList<Student> students = loader.getStudents();
+
+        System.out.println("\n" + studentInfo() + "\n");
 
         menu(input, students, loader);
     }  
