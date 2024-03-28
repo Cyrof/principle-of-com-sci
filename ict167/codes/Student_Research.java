@@ -21,15 +21,8 @@ public class Student_Research extends Student{
     public void setUnit(Unit unit){
         if(this.isValidateUnit(unit)){
             super.setUnit(unit);
-            System.out.println("Course set");
+            // System.out.println("Course set");
         }
-        // if (!this.unit){
-        //     String[] temp = data.split(",");
-        //     this.course = new Research(this.type);
-        //     this.course.setPp_mark(Integer.parseInt(temp[1]));
-        //     this.course.setDis_mark(Integer.parseInt(temp[2]));
-        // }
-        // System.out.println("Course set");
     }
 
     private boolean isValidateUnit(Unit unit){

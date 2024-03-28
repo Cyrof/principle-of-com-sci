@@ -32,7 +32,9 @@ public class Client {
             try{
                 choice = Integer.parseInt(choiceString);
             } catch (Exception e){
-                System.err.println("Invalid input. Try again.");
+                System.err.println("\nInvalid input. Try again.");
+                continue;
+
             }
 
             System.out.println("\n");
@@ -79,8 +81,9 @@ public class Client {
         for (int i=0; i<students.size(); i++){
             Student s = loader.load_marks(students.get(i));
             students.set(i, s);
+            System.out.printf("Student %d marks loaded.\n", i+1);
         }
-        System.out.println("Student marks loaded");
+        System.out.println("\nStudent marks loaded");
     }
 
     public static Student findStudent(int studID, ArrayList<Student> student){
