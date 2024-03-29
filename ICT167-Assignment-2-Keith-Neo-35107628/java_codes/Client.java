@@ -25,7 +25,7 @@ public class Client {
             String choiceString = input.nextLine().trim();
 
             if(choiceString.isEmpty()){
-                System.err.println("\nInput is invalid. Try again.");
+                System.err.println("\nInvalid input. Try again.");
                 continue;
             }
 
@@ -183,7 +183,8 @@ public class Client {
                     totalOverall += uc.getOverall_marks();
                     tempSC.add(sc);
                 } catch (Exception e){
-                    System.out.println("Student has no unit");
+                    // System.out.println("Student has no unit");
+                    continue;
                 }
                 
             }
@@ -246,6 +247,7 @@ public class Client {
                 continue;
             } catch (NullPointerException e){
                 System.err.println("Student marks not loaded.");
+                break;
             }
         }
     }
@@ -276,6 +278,7 @@ public class Client {
     public static void writeToFile(ArrayList<Student> students, CsvHandler loader){
         if (isSorted(students)){
             loader.exportToCsv(students);
+            System.out.println("Sorted students has been saved to csv_files/sorted_students.csv");
         } else{
             System.out.println("Students not sorted.");
         }
