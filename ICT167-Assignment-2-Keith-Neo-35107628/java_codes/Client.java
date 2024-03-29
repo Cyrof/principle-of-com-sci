@@ -5,10 +5,27 @@ import java.io.PrintWriter;
 import java.io.FileReader;
 
 /**
- * Client
+ * Provides a user interface for managing student data and marks within an educational system.
+ * This class handles user input to perform various operations such as adding marks from a file,
+ * removing a studetn, displaying all students, showing overall statistics for course students,
+ * showing student statistics, sorting studetns, and saving sorted students to a CSV file.
+ * It uses a {@link Scanner} for user input, an {@link ArrayList} of {@link Student} objects for
+ * storing student data, and a {@link CsvHandler} for loading and saving student data to CSV files.
+ * 
+ * @author Keith Neo Kai Si
  */
 public class Client {
 
+    /**
+     * Displays a menu to the user and handles user input to perform various operations.
+     * The operations include exiting the program, adding marks from a file, removing a student,
+     * displaying all students, showing overall statistics for course students, showing student statisics,
+     * sorting students, and saving sorted students to a CSV file.
+     * 
+     * @param input The {@link Scanner} object for reading user input.
+     * @param students The {@link ArrayList} of {@link Student} objects.
+     * @param loader The {@link CsvHandler} object for loading and saving student data.
+     */
     public static void menu(Scanner input, ArrayList<Student> students, CsvHandler loader){
         int choice = 0;
         while (true){
@@ -72,11 +89,19 @@ public class Client {
         }
     }
 
-
+    /**
+     * Exists the program with a farewell message.
+     */
     public static void exit(){
         System.out.println("\nThank you for using the program. Have a great day!\n");
     }
 
+    /**
+     * Adds marks to students from a file using the provide {@link CsvHandler}.
+     * 
+     * @param students The {@link ArrayList} of {@link Student} objects.
+     * @param loader The {@link CsvHandler} object for loading student marks.
+     */
     public static void addMarks(ArrayList<Student> students, CsvHandler loader){
         for (int i=0; i<students.size(); i++){
             Student s = loader.load_marks(students.get(i));
@@ -86,6 +111,13 @@ public class Client {
         System.out.println("\nStudent marks loaded");
     }
 
+    /**
+     * Finds a student by their ID in the provided list of students.
+     * 
+     * @param studID The ID of the student to find.
+     * @param student The {@link ArrayList} of {@link Student} objects.
+     * @return The {@link Student} object if found, null otherwise.
+     */
     public static Student findStudent(int studID, ArrayList<Student> student){
         for (Student s : student){
             if (studID == s.getStudID()) {
@@ -95,6 +127,12 @@ public class Client {
         return null;
     }
 
+    /**
+     * Removes a student from the list of students based on user input.
+     * 
+     * @param input The {@link Scanner} object for reading user input.
+     * @param students The {@link ArrayList} of {@link Student} objects.
+     */
     public static void removeStudent(Scanner input, ArrayList<Student> students){
         int userIn = 0;
         Student s = null;
@@ -157,6 +195,11 @@ public class Client {
        
     }
 
+    /**
+     * Displays all students in the list.
+     * 
+     * @param students The {@link ArrayList} of {@link Student} objects.
+     */
     public static void displayAll(ArrayList<Student> students){
         for (Student s : students){
             if (s instanceof Student_Course){
@@ -169,6 +212,11 @@ public class Client {
         }
     }
 
+    /**
+     * displays overall statistics for course students.
+     * 
+     * @param students The {@link ArrayList} of {@link Student} objects.
+     */
     public static void displayAllStats(ArrayList<Student> students){
         ArrayList<Student_Course> tempSC = new ArrayList<>();
         double totalOverall = 0;
@@ -212,6 +260,12 @@ public class Client {
         System.out.println(s);
     }
 
+    /**
+     * Displays statistics for a specific student based on user input.
+     * 
+     * @param input The {@link Scanner} object for reading based on user input.
+     * @param students The {@link ArrayList} of {@link Student} objects.
+     */
     public static void displayStudentStat(Scanner input, ArrayList<Student> students){
         int userIn = 0;
         Student s = null;
@@ -252,6 +306,11 @@ public class Client {
         }
     }
 
+    /**
+     * Sorts the list of students by their student ID.
+     * 
+     * @param students The {@link ArrayList} of {@link Student} objects.
+     */
     public static void sortStudents(ArrayList<Student> students){
         int n = students.size();
         for (int i=1; i<n; i++){
@@ -266,6 +325,12 @@ public class Client {
         System.out.println("Student sorted.");
     }
 
+    /**
+     * Checks if the list of students is sorted by their student ID.
+     * 
+     * @param students The {@link ArrayList} of {@link Student} objects.
+     * @return true if the list is sorted, false otherwise.
+     */
     public static boolean isSorted(ArrayList<Student> students){
         for(int i=0; i<students.size()-1; i++){
             if(students.get(i).getStudID() > students.get(i+1).getStudID()){
@@ -275,6 +340,12 @@ public class Client {
         return true;
     }
 
+    /**
+     * Writes the sorted list of students to a CSV file if the list is sorted.
+     * 
+     * @param students The {@link ArrayList} of {@link Student} objects.
+     * @param loader The {@link CsvHandler} object for saving student data.
+     */
     public static void writeToFile(ArrayList<Student> students, CsvHandler loader){
         if (isSorted(students)){
             loader.exportToCsv(students);
@@ -284,11 +355,21 @@ public class Client {
         }
     }
 
+    /**
+     * Returns a string containing information about the student.
+     * 
+     * @return The student information string.
+     */
     public static String studentInfo(){
         String info = "Student information:\nName: Keith Neo Kai Si\nStudent Number: 35107628\nModule: ICT167\nTutor: Aaron yeo";
         return info;
     }
 
+    /**
+     * The main method that initializes the user interface and starts the program. 
+     * 
+     * @param args command-line arguments (not used).
+     */
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         CsvHandler loader = new CsvHandler();
