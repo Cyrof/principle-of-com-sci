@@ -116,13 +116,11 @@ public class CsvHandler {
             writer = new PrintWriter(this.sorted_student_output);
 
             for (Student student : students){
-                System.out.println("This is working");
                 String s = String.format("%c,%s,%s,%d",student.getType(), student.getFName(), student.getLName(), student.getStudID());
-                System.out.println(s);
                 writer.println(s);
                 // writer.printf("%c,%s,%s,%d\n",student.getType(), student.getFName(), student.getLName(), student.getStudID());
             }
-            System.out.println("Sorted students saved");
+            // System.out.println("Sorted students saved");
         } catch (Exception e){
             System.out.println("An error occurred: " + e.getMessage());
         } finally {
