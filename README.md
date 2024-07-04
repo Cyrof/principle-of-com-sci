@@ -1,3 +1,5 @@
+# This repo is archive as this university module is completed.
+
 # Principle of Computer Science Labs and Assignments (Java)
 
 Welcome to the principle-of-com-sci repository! This repository contains lab exercises and assignments related to the principles of computer science implemented in Java. Each lab exercise is organised into folders named "topic 1" through "topic 10", and there are two assignment folders. Additionally, zip files of each folder are provided for easy download and distribution.
